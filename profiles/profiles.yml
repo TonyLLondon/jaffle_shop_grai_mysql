@@ -1,0 +1,12 @@
+jaffle_shop:
+  target: dev
+  outputs:
+    dev:
+      type: mysql
+      host: localhost
+      user: docker
+      password: docker
+      port: 3306
+      dbname: db
+      schema: db
+      threads: 4
