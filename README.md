@@ -1,9 +1,9 @@
-## Testing grai with DBT and Postgres project: `jaffle_shop_grai`
+## Testing grai with DBT and mysql project: `jaffle_shop_grai`
 
-`jaffle_shop` is a fictional eCommerce store invented by our friends at DBT. The original DBT repository from which this is forked, transformed raw data into two models, customer and orders, ready for analytics. This repo builds on that to allow you to create a grai project with two connectors from the same data, DBT and postgres. 
+`jaffle_shop` is a fictional eCommerce store invented by our friends at DBT. The original DBT repository from which this is forked, transformed raw data into two models, customer and orders, ready for analytics. This repo builds on that to allow you to create a grai project with two connectors from the same data, DBT and mysql. 
 
 ### What is this repo?
-- A self-contained playground grai project, focused on postgres and DBT.
+- A self-contained playground grai project, focused on mysql and DBT.
 - Pre-requisites are Docker, Python and a spirit of adventure.
 
 ### Running this project
@@ -15,30 +15,30 @@ $ git clone https://github.com/grai-io/jaffle_shop.git
 $ cd jaffle_shop
 ```
 
-2. Run docker compose, this will create 4 docker countainers. For grai you are running the frontend, the backend, and the postgres database. For jaffle shop you are running a second postgres database on port 5433 to avoid conflicts.
-Create docker container for the Postgres database. Note this is setup to use port 5433 to avoid conflicts. 
+2. Run docker compose, this will create 4 docker countainers. For grai you are running the frontend, the backend, and the mysql database. For jaffle shop you are running a second mysql database on port 5433 to avoid conflicts.
+Create docker container for the mysql database. Note this is setup to use port 5433 to avoid conflicts. 
 ```bash
 $ docker-compose -f ./warehouse/docker-compose.yml up -d
 ```
 
-3. Install DBT for Postgres, don't worry about configuring it, the repository includes a profiles file to work with your new local postgres database.
+3. Install DBT for mysql, don't worry about configuring it, the repository includes a profiles file to work with your new local mysql database.
 ```bash
 $ pip install dbt-mysql
 ```
 
-4. Run DBT, this will build your Postgres database from the jaffle shop seed files. It will also create foreign key relationships (not normally done with DBT, but essential to your production postgres!)
+4. Run DBT, this will build your mysql database from the jaffle shop seed files. It will also create foreign key relationships (not normally done with DBT, but essential to your production mysql!)
 ```bash
 $ dbt build --profiles-dir ./profiles
 ```
 
-5. Almost there! You now should have four docker containers running, and its time to pull it all together. Install grai CLI and the postgres and DBT connectors.
+5. Almost there! You now should have four docker containers running, and its time to pull it all together. Install grai CLI and the mysql and DBT connectors.
 ```bash
 $ pip install grai-cli
-$ pip install grai-source-postgres
+$ pip install grai-source-mysql
 $ pip install grai-source-dbt
 ```
 
-6. Run the final script to read from DBT and postgres to populate your grai server.
+6. Run the final script to read from DBT and mysql to populate your grai server.
 ```bash
 $ python populate_grai.py
 ```
